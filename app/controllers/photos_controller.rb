@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
       @photo.user_id = @user.id
       @photo.title = photo_params[:title]
       @photo.save
-      flash[:notice] = "Successfully uploaded a photo #{@photo.title}"
+      flash[:notice] = "Successfully uploaded a photo with title #{@photo.title}"
       redirect_to user_path(@user)
     end
   end
