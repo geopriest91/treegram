@@ -13,3 +13,5 @@
 /tmp
 /public/*
 /.idea/*
+*.xml
+*.sqlite3
