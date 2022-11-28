@@ -8,19 +8,20 @@ class PhotosController < ApplicationController
     else
     @photo = Photo.create(photo_params)
       @photo.user_id = @user.id
+      @photo.title = photo_params[:title]
       @photo.save
-      flash[:notice] = "Successfully uploaded a photo"
+      flash[:notice] = "Successfully uploaded a photo #{@photo.title}"
       redirect_to user_path(@user)
     end
   end
 
   def new
     @user = User.find(params[:user_id])
-    @photo = Photo.create()
+    @photo = Photo.create(params[:title])
   end
 
   private
   def photo_params
-    params.require(:photo).permit(:image)
+    params.require(:photo).permit(:image, :title)
   end
 end
