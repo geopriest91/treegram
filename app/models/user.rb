@@ -1,6 +1,12 @@
 class User<ActiveRecord::Base
   has_many :photos
   has_many :tags
+  has_many :followed_users,
+            foreign_key: :follower_id,
+            class_name: 'Follow',
+            dependent: :destroy
+  has_many :following_users, through: :followed_users, dependent: :destroy
+
   attr_accessor :password
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/

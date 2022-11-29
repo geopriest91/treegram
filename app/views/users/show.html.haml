@@ -1,22 +1,26 @@
 .row.top_row
-  .col-sm-6.user_att
+  .col-sm-3.user_att
     %h2= @user.email
     - if @user.avatar_file_name
       = image_tag @user.avatar.url(:thumb)
-  .col-sm-6
+  .col-sm-3
     = link_to 'Logout', log_out_path, class: ['btn', 'btn-danger', 'logout_btn']
   .row
     = link_to 'Add Photo', new_user_photo_path(@user), class: ['btn', 'btn-success', 'add_photo_btn']
+
 %br/
 %br/
 %br/
 %br/
 %br/
 %br/
+.row
+  = link_to 'Show all registered users', "/allusers", class: ['btn', 'btn-success']
 %br/
 %br/
 %br/
 %br/
+
 .row
   - @user.photos.each  do |photo|
     .well.col-sm-4
@@ -28,3 +32,5 @@
         = f.submit "Tag User"
       - photo.tags.each do |tag|
         = tag.user.email
+
+  - @followingUsers

@@ -25,13 +25,27 @@ class UsersController < ApplicationController
     @users = User.all
     @user = User.find(params[:id])
     @tag = Tag.new
+    @followingUsers = @user.followed_users
+  end
+
+  def showAll
+    @users = User.all
+  end
+
+  def follow
+
+  end
+  def followCompleted
+    @user = User.find(params[:id])
+    @user.following_users.create(follower_id: current_user.id, followee_id: @user.id)
   end
 
   private
 
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :avatar)
-  end
+    end
+
 
 
 end
